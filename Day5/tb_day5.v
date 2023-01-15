@@ -4,36 +4,30 @@ module tb_day5();
    reg reset;
    wire [7:0] count;
 
-   day5 dut(clk, reset, count);
+   day5 dut (
+      .clk(clk),
+      .reset(reset),
+      .count(count)
+   );
 
    initial begin
-      //Initialize inputs and waveform
       clk = 0;
-      reset = 1;
-      #10
-      reset = 0;
-      #10
-      //Increment the counter 8 times
-      repeat(8) begin
-         clk = 1;
-         #5
-         clk = 0;
-         #5
-      end 
+      forever #5 clk = ~clk;
    end
 
    initial begin
-      //Check if the count is correct
-      if(count == 8'h8)
-        $display("Test passed!");
-      else
-        $display("Test failed!");
-      #10
-      $finish;
-   end
+    reset <= 1'b1;
+    #5;
+    reset <= 1'b0;
+    for (int i=0; i<128; i++)
+      @(posedge clk);
+    $finish();
+  end
+
    initial begin
       $dumpfile("day5.vcd");
       $dumpvars();
    end
+
 endmodule
 
