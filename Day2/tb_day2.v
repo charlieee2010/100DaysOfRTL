@@ -39,5 +39,9 @@ module day2_tb;
       $finish();
    end
 
+     initial begin
+    $dumpfile("day2.vcd");
+    $dumpvars();
+  end 
 
 endmodule
