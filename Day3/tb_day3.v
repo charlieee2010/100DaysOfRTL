@@ -32,5 +32,10 @@ module day3_tb;
   initial begin
     $monitor("Time: %t Rising Edge: %b Falling Edge: %b", $time, rising_edge_o, falling_edge_o);
   end
+  
+  initial begin
+    $dumpfile("day3.vcd");
+    $dumpvars();
+  end
 
 endmodule
